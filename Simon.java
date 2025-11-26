@@ -25,11 +25,17 @@ public class Simon extends Application {
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.CENTER);
         
-        Image blueBtnImage = new Image("images/red_button.png");
+        Image blueBtnImage = new Image("images/blue_button.png");
         ImageView blueBtnImageView = new ImageView(blueBtnImage);
         
         Image redBtnImage = new Image("images/red_button.png");
         ImageView redBtnImageView = new ImageView(redBtnImage);
+
+        Image yellowBtnImage = new Image("images/yellow_button.png");
+        ImageView yellowBtnImageView = new ImageView(yellowBtnImage);
+
+        Image greenBtnImage = new Image("images/green_button.png");
+        ImageView greenBtnImageView = new ImageView(greenBtnImage);
         
         Label promptLabel = new Label();
         promptLabel.setText("Enter your thoughts");
@@ -43,7 +49,7 @@ public class Simon extends Application {
 
         Button submissionBtn = new Button();
         submissionBtn.setText("Submit");
-        submissionBtn.setGraphic(blueBtnImageView);
+        submissionBtn.setGraphic(greenBtnImageView);
 
         // Set up reactions (aka callbacks).
         submissionBtn.setOnAction(event -> onSubmitThought(thoughtsBox, messageBox));
