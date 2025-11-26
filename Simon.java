@@ -38,7 +38,7 @@ public class Simon extends Application {
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
         
         Label promptLabel = new Label();
-        promptLabel.setText("Enter your thoughts");
+        promptLabel.setText("Simon");
 
         TextField thoughtsBox = new TextField();
         thoughtsBox.setMaxWidth(150);
@@ -63,7 +63,7 @@ public class Simon extends Application {
         // Set up the window and display it.
         Scene scene = new Scene(contentBox, 300, 200);
         stage.setScene(scene);
-        stage.setTitle("Amazing App 2000");
+        stage.setTitle("Simon Game");
         stage.show();
     }
 
