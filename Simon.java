@@ -39,26 +39,26 @@ public class Simon extends Application {
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon");
-
-        TextField thoughtsBox = new TextField();
-        thoughtsBox.setMaxWidth(150);
-        thoughtsBox.setPromptText("type here");
         
         TextArea messageBox = new TextArea();
         messageBox.setEditable(false);
 
-        Button submissionBtn = new Button();
-        submissionBtn.setText("Submit");
-        submissionBtn.setGraphic(greenBtnImageView);
+        Button redBtn = new Button();
+        redBtn.setGraphic(redBtnImageView);
 
-        // Set up reactions (aka callbacks).
-        submissionBtn.setOnAction(event -> onSubmitThought(thoughtsBox, messageBox));
+        Button blueBtn = new Button();
+        blueBtn.setGraphic(blueBtnImageView);
+
+        Button greenBtn = new Button();
+        greenBtn.setGraphic(greenBtnImageView);
+
+        Button yellowBtn = new Button();
+        yellowBtn.setGraphic(yellowBtnImageView);
+
 
         // Add components to the content box.
-        contentBox.getChildren().add(promptLabel);
-        contentBox.getChildren().add(thoughtsBox);
-        contentBox.getChildren().add(submissionBtn);
-        contentBox.getChildren().add(messageBox);
+        contentBox.getChildren().add(redBtn);
+        
 
         // Set up the window and display it.
         Scene scene = new Scene(contentBox, 300, 200);
@@ -66,16 +66,5 @@ public class Simon extends Application {
         stage.setTitle("Simon Game");
         stage.show();
     }
-
-    /**
-     * Handle the submission of a thought.
-     * @param inputBox  The TextField where the user types their thought.
-     * @param outputBox The TextArea where the submitted thoughts are displayed.
-     */
-    void onSubmitThought(TextField inputBox, TextArea outputBox) {
-        String text = inputBox.getText();
-        inputBox.clear();
-        System.out.println("Interesting thought: " + text);
-        outputBox.appendText("Interesting thought: " + text + "\n");
-    }
+    
 }
