@@ -8,8 +8,8 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "mainClass": "App",    // Change this to match class containing main method
-            "vmArgs": "--module-path \"C:/Users/yek/OneDrive - Limestone DSB/Workspace/Java/lib/javafx-sdk-21.0.9/lib\" --add-modules javafx.controls,javafx.fxml" // Change this to match your JavaFX lib path
+            "mainClass": "Simon",
+            "vmArgs": "--module-path \"c:\\Users\\og5ys09\\OneDrive - Limestone DSB\\Grade 11 CS\\Lib\\javafx-sdk-21.0.9\\lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

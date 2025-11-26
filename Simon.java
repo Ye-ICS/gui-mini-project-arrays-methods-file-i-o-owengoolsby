@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
 /**
  * Template JavaFX application.
  */
-public class App extends Application {
+public class Simon extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,7 +24,13 @@ public class App extends Application {
         // Create components to add.
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.CENTER);
-
+        
+        Image blueBtnImage = new Image("images/red_button.png");
+        ImageView blueBtnImageView = new ImageView(blueBtnImage);
+        
+        Image redBtnImage = new Image("images/red_button.png");
+        ImageView redBtnImageView = new ImageView(redBtnImage);
+        
         Label promptLabel = new Label();
         promptLabel.setText("Enter your thoughts");
 
@@ -35,6 +43,7 @@ public class App extends Application {
 
         Button submissionBtn = new Button();
         submissionBtn.setText("Submit");
+        submissionBtn.setGraphic(blueBtnImageView);
 
         // Set up reactions (aka callbacks).
         submissionBtn.setOnAction(event -> onSubmitThought(thoughtsBox, messageBox));
