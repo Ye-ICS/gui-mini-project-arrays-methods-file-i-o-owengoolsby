@@ -19,6 +19,8 @@ public class Simon extends Application {
         launch(args);
     }
     
+    int score = 0;
+
     @Override
     public void start(Stage stage) {
         // Create components to add.
@@ -54,7 +56,7 @@ public class Simon extends Application {
 
         Button yellowBtn = new Button();
         yellowBtn.setGraphic(yellowBtnImageView);
-
+        
 
         // Add components to the content box.
         contentBox.getChildren().add(redBtn);
