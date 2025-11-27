@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Randomizer",
+            "request": "launch",
+            "mainClass": "Randomizer",
+            "projectName": "gui-mini-project-arrays-methods-file-i-o-owengoolsby_a5af49b"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "Simon",

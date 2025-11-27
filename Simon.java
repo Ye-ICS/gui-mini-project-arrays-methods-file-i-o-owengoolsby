@@ -1,3 +1,4 @@
+import java.util.Random;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  * Template JavaFX application.
@@ -68,13 +70,13 @@ public class Simon extends Application {
         redBtn.setOnAction(e -> {
         score++;
         });
-         blueBtn.setOnAction(e -> {
+        blueBtn.setOnAction(e -> {
         score++;
         });
-         greenBtn.setOnAction(e -> {
+        greenBtn.setOnAction(e -> {
         score++;
         });
-         yellowBtn.setOnAction(e -> {
+        yellowBtn.setOnAction(e -> {
         score++;
         });
         
@@ -87,6 +89,8 @@ public class Simon extends Application {
         grid.add(blueBtn, 1, 0);
         grid.add(greenBtn, 0, 1);
         grid.add(yellowBtn, 1, 1);
+        
+       
 
         contentBox.getChildren().addAll(promptLabel, grid);
         
