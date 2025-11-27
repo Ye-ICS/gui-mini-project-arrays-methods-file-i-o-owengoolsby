@@ -40,29 +40,29 @@ public class Simon extends Application {
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
 
-        greenBtnImageView.setFitWidth(200);
-        greenBtnImageView.setFitHeight(200);
-        yellowBtnImageView.setFitWidth(200);
-        yellowBtnImageView.setFitHeight(200);
-        redBtnImageView.setFitWidth(200);
-        redBtnImageView.setFitHeight(200);
-        blueBtnImageView.setFitWidth(200);
-        blueBtnImageView.setFitHeight(200);
-
+        
+        greenBtnImageView.setFitWidth(400);
+        greenBtnImageView.setFitHeight(400);
+        yellowBtnImageView.setFitWidth(400);
+        yellowBtnImageView.setFitHeight(400);
+        redBtnImageView.setFitWidth(400);
+        redBtnImageView.setFitHeight(400);
+        blueBtnImageView.setFitWidth(400);
+        blueBtnImageView.setFitHeight(400);
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon");
+         
         
-
         Button redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
-
+        
         Button blueBtn = new Button();
         blueBtn.setGraphic(blueBtnImageView);
-
+        
         Button greenBtn = new Button();
         greenBtn.setGraphic(greenBtnImageView);
-
+        
         Button yellowBtn = new Button();
         yellowBtn.setGraphic(yellowBtnImageView);
         
