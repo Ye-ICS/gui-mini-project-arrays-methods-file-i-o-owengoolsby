@@ -52,7 +52,6 @@ public class Simon extends Application {
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon");
-         
         
         Button redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
@@ -65,6 +64,19 @@ public class Simon extends Application {
         
         Button yellowBtn = new Button();
         yellowBtn.setGraphic(yellowBtnImageView);
+
+        redBtn.setOnAction(e -> {
+        score++;
+        });
+         blueBtn.setOnAction(e -> {
+        score++;
+        });
+         greenBtn.setOnAction(e -> {
+        score++;
+        });
+         yellowBtn.setOnAction(e -> {
+        score++;
+        });
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
