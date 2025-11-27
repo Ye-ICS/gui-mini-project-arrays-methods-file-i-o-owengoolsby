@@ -39,12 +39,20 @@ public class Simon extends Application {
 
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
+
+        greenBtnImageView.setFitWidth(200);
+        greenBtnImageView.setFitHeight(200);
+        yellowBtnImageView.setFitWidth(200);
+        yellowBtnImageView.setFitHeight(200);
+        redBtnImageView.setFitWidth(200);
+        redBtnImageView.setFitHeight(200);
+        blueBtnImageView.setFitWidth(200);
+        blueBtnImageView.setFitHeight(200);
+
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon");
         
-        TextArea messageBox = new TextArea();
-        messageBox.setEditable(false);
 
         Button redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
@@ -60,18 +68,18 @@ public class Simon extends Application {
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
+        grid.setHgap(0);
+        grid.setVgap(0);
 
         grid.add(redBtn, 0, 0);
         grid.add(blueBtn, 1, 0);
         grid.add(greenBtn, 0, 1);
         grid.add(yellowBtn, 1, 1);
 
-        contentBox.getChildren().addAll(promptLabel, grid, messageBox);
+        contentBox.getChildren().addAll(promptLabel, grid);
         
         // Set up the window and display it.
-        Scene scene = new Scene(contentBox, 300, 200);
+        Scene scene = new Scene(contentBox, 1000, 800);
         stage.setScene(scene);
         stage.setTitle("Simon Game");
         stage.show();
