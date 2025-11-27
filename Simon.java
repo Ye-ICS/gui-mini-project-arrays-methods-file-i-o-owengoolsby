@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -57,11 +58,18 @@ public class Simon extends Application {
         Button yellowBtn = new Button();
         yellowBtn.setGraphic(yellowBtnImageView);
         
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
 
-        // Add components to the content box.
-        contentBox.getChildren().add(redBtn);
+        grid.add(redBtn, 0, 0);
+        grid.add(blueBtn, 1, 0);
+        grid.add(greenBtn, 0, 1);
+        grid.add(yellowBtn, 1, 1);
+
+        contentBox.getChildren().addAll(promptLabel, grid, messageBox);
         
-
         // Set up the window and display it.
         Scene scene = new Scene(contentBox, 300, 200);
         stage.setScene(scene);
