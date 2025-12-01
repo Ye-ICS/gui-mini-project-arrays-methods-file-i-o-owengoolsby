@@ -112,5 +112,12 @@ public class Simon extends Application {
         stage.show();
     }
     
-    
+    private void generateNextMove () {
+        int nextColor = random.nextInt(4);
+        sequence.add(nextColor);
+        userSequenceIndex = 0;
+        score = sequence.size() - 1;
+        flashSequence();
+    }
+
 }
