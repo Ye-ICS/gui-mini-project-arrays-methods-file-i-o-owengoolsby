@@ -67,6 +67,15 @@ public class Simon extends Application {
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon");
+
+        Button startBtn = new Button("Start Game");
+        startBtn.setOnAction(e -> {
+            sequence.clear();
+            score = 0;
+            promptLabel.setText("Watch closely, you gotta remember");
+            startBtn.setDisable(true);
+            generateNextMove();
+        });
         
         Button redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
@@ -103,7 +112,7 @@ public class Simon extends Application {
         grid.add(greenBtn, 0, 1);
         grid.add(yellowBtn, 1, 1);
         
-        contentBox.getChildren().addAll(promptLabel, grid);
+        contentBox.getChildren().addAll(startBtn, promptLabel, grid);
         
         // Set up the window and display it.
         Scene scene = new Scene(contentBox, 1000, 800);
