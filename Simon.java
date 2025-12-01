@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -28,6 +29,13 @@ public class Simon extends Application {
     private static final int BLUE = 1;
     private static final int GREEN = 2;
     private static final int YELLOW = 3;
+
+    private ArrayList<Integer> sequence = new ArrayList<>();
+
+    private Random random = new Random();
+    
+    private int userSequenceIndex = 0;
+
 
 
     @Override
@@ -103,5 +111,6 @@ public class Simon extends Application {
         stage.setTitle("Simon Game");
         stage.show();
     }
+    
     
 }
