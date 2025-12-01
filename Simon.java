@@ -24,6 +24,12 @@ public class Simon extends Application {
     
     int score = 0;
 
+    private static final int RED = 0;
+    private static final int BLUE = 1;
+    private static final int GREEN = 2;
+    private static final int YELLOW = 3;
+
+
     @Override
     public void start(Stage stage) {
         // Create components to add.
@@ -41,7 +47,6 @@ public class Simon extends Application {
 
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
-
         
         greenBtnImageView.setFitWidth(400);
         greenBtnImageView.setFitHeight(400);
@@ -90,8 +95,6 @@ public class Simon extends Application {
         grid.add(greenBtn, 0, 1);
         grid.add(yellowBtn, 1, 1);
         
-       
-
         contentBox.getChildren().addAll(promptLabel, grid);
         
         // Set up the window and display it.
