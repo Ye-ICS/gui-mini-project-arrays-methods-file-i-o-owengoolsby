@@ -25,6 +25,12 @@ public class Simon extends Application {
     
     int score = 0;
 
+    private Button redBtn;
+    private Button blueBtn;
+    private Button greenBtn;
+    private Button yellowBtn;
+
+
     private static final int RED = 0;
     private static final int BLUE = 1;
     private static final int GREEN = 2;
