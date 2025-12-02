@@ -13,7 +13,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  * Template JavaFX application.
@@ -24,6 +29,8 @@ public class Simon extends Application {
     }
     
     int score = 0;
+    private int highscore = 0;
+    private static final String HIGHSCORE_FILE = "high_score.txt";
 
     private Button redBtn;
     private Button blueBtn;
@@ -96,16 +103,16 @@ public class Simon extends Application {
         yellowBtn.setGraphic(yellowBtnImageView);
 
         redBtn.setOnAction(e -> {
-        score++;
+        checkUserInput(RED);
         });
         blueBtn.setOnAction(e -> {
-        score++;
+        checkUserInput(BLUE);
         });
         greenBtn.setOnAction(e -> {
-        score++;
+        checkUserInput(GREEN);      
         });
         yellowBtn.setOnAction(e -> {
-        score++;
+        checkUserInput(YELLOW);
         });
         
         GridPane grid = new GridPane();
@@ -127,6 +134,26 @@ public class Simon extends Application {
         stage.show();
     }
     
+    private void checkUserInput (int colorCode) {
+        if (colorCode == sequence.get(userSequenceIndex)) {
+            userSequenceIndex++;
+            if (userSequenceIndex == sequence.size()) {
+                score=sequence.size();
+                Timeline pause = new Timeline(new KeyFrame(
+                    Duration.seconds(1.5),
+                    e -> generateNextMove()
+                ));
+                pause.play();
+            }
+        }
+        else {
+            disableColorButtons(true);
+            promptLabel.setText("Game over! Final score:" + score + "Press start to play agian");
+        }
+
+
+    }
+
     private void generateNextMove () {
         int nextColor = random.nextInt(4);
         sequence.add(nextColor);
