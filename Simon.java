@@ -171,15 +171,62 @@ public class Simon extends Application {
             startBtn.setDisable(false);
         }
     }
+
+    private void flashSequence(){
+        disableColorButtons(true);
+        Timeline timeline = new Timeline();
+        double flashDuration = 400;
+        double stepDuration = 700;
+
+        for (int i = 0; i < sequence.size(); i++){
+            final int colorCode = sequence.get(i);
+            final int step = i + 1;
+
+            KeyFrame turnOn = new KeyFrame (
+                Duration.millis(i * stepDuration),
+                e -> {
+                    flashButton(colorCode, true);
+                    promptLabel.setText("Sequence step" + step + " of " + sequence.size());
+                }
+            );
+
+            KeyFrame turnOff = new KeyFrame(
+                Duration.millis(i * stepDuration+ flashDuration),
+                e -> flashButton(colorCode, false)
+            );
+
+            timeline.getKeyFrames().addAll(turnOff,turnOn);
+        }
+
+        double totalDuration = sequence.size() * stepDuration;
+        KeyFrame enableInput = new KeyFrame(
+            Duration.millis(totalDuration),
+            e-> {
+                disableColorButtons(false);
+                promptLabel.setText("Your Turn! Repeat the sequence");
+            }
+        );
+        timeline.getKeyFrames().add(enableInput);
+
+        timeline.play();
+    }
+
+    private void disableColorButtons (boolean disabled) {
+        redBtn.setDisable(disabled);
+        blueBtn.setDisable(disabled);
+        greenBtn.setDisable(disabled);
+        yellowBtn.setDisable(disabled);
+    }
+
     private void saveHighScore(){
         if (score > highscore) {
             highscore = score;
             File File = new File(HIGHSCORE_FILE);
-            try (PrintWriter writer = new PrintWriter(file)) {
+            try (PrintWriter writer = new PrintWriter(File)) {
                 writer.print(highscore);
                 System.out.println("New High Score saved: " + highscore);
-            } catch (java.io.IOException e) {
-                System.out.println("Could not save high score to file" + e.getMessage());
+            } catch (java.io.IOException ioe) {
+                System.out.println("Could not save high score to file" + ioe.getMessage());
             }
         }
     }
