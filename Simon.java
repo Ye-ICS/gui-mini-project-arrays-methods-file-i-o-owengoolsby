@@ -39,25 +39,25 @@ public class Simon extends Application {
     private Button startBtn;
     private Label promptLabel;
 
-
+    
     private static final int RED = 0;
     private static final int BLUE = 1;
     private static final int GREEN = 2;
     private static final int YELLOW = 3;
-
+    
     private ArrayList<Integer> sequence = new ArrayList<>();
-
+    
     private Random random = new Random();
     
     private int userSequenceIndex = 0;
-
-
-
+    
+    
+    
     @Override
     public void start(Stage stage) {
-
+        
         loadHighScore();
-
+        
         
         // Create components to add.
         VBox contentBox = new VBox(20);
@@ -87,7 +87,7 @@ public class Simon extends Application {
         
         Label promptLabel = new Label();
         promptLabel.setText("Simon Highscore:" + highscore);
-
+        
         
         redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
@@ -111,25 +111,25 @@ public class Simon extends Application {
             startBtn.setDisable(true);
             generateNextMove();
         });
-
+        
         redBtn.setOnAction(e -> {
-        checkUserInput(RED);
+            checkUserInput(RED);
         });
         blueBtn.setOnAction(e -> {
-        checkUserInput(BLUE);
+            checkUserInput(BLUE);
         });
         greenBtn.setOnAction(e -> {
-        checkUserInput(GREEN);      
+            checkUserInput(GREEN);      
         });
         yellowBtn.setOnAction(e -> {
-        checkUserInput(YELLOW);
+            checkUserInput(YELLOW);
         });
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(5);
         grid.setVgap(5);
-
+        
         grid.add(redBtn, 0, 0);
         grid.add(blueBtn, 1, 0);
         grid.add(greenBtn, 0, 1);
@@ -218,6 +218,32 @@ public class Simon extends Application {
         yellowBtn.setDisable(disabled);
     }
 
+    private void flashButton (int colorCode, boolean on) {
+        Button btn = null;
+
+        switch(colorCode) {
+            case RED:
+                btn = redBtn;
+                break;
+            case BLUE:
+                btn = blueBtn;
+                break;
+            case GREEN:
+                btn = greenBtn;
+                break;
+            case YELLOW:
+                btn = yellowBtn;
+                break;
+        }
+        if (btn != null) {
+            if (on) {
+                btn.setStyle("-fx-effect: dropshadow (three-pass-box, white, 30, 0.8, 0, 0);");
+            } else {
+                btn.setStyle(null);
+            }
+        }
+    }
+
     private void saveHighScore(){
         if (score > highscore) {
             highscore = score;
@@ -232,7 +258,7 @@ public class Simon extends Application {
     }
     
 
-    private void loadHighscore() {
+    private void loadHighScore() {
         File file = new File(HIGHSCORE_FILE);
         try (Scanner scanner = new Scanner(file)) {
             if(scanner.hasNextInt()) {
@@ -240,6 +266,7 @@ public class Simon extends Application {
             }
         } catch (java.io.FileNotFoundException e) {
             System.out.println("High score file not found. Starting fresh.");
+            highscore = 0;
         } catch (Exception e) {
             e.printStackTrace();
             highscore = 0;
