@@ -36,6 +36,8 @@ public class Simon extends Application {
     private Button blueBtn;
     private Button greenBtn;
     private Button yellowBtn;
+    private Button startBtn;
+    private Label promptLabel;
 
 
     private static final int RED = 0;
@@ -53,8 +55,14 @@ public class Simon extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        loadHighScore();
+
+        Label promptLabel = new Label();
+        promptLabel.setText("Simon Highscore:" + highscore);
+
         // Create components to add.
-        VBox contentBox = new VBox();
+        VBox contentBox = new VBox(20);
         contentBox.setAlignment(Pos.CENTER);
         
         Image blueBtnImage = new Image("images/blue_button.png");
@@ -68,7 +76,8 @@ public class Simon extends Application {
 
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
-        
+
+        int btnSize = 150;
         greenBtnImageView.setFitWidth(400);
         greenBtnImageView.setFitHeight(400);
         yellowBtnImageView.setFitWidth(400);
@@ -133,6 +142,19 @@ public class Simon extends Application {
         stage.setTitle("Simon Game");
         stage.show();
     }
+
+    private void saveHighScore(){
+        if (score > highscore) {
+            highscore = score;
+            File File = new File(HIGHSCORE_FILE);
+            try (PrintWriter writer = new PrintWriter(file)) {
+                writer.print(highscore);
+                System.out.println("New High Score saved: " + highscore);
+            } catch (java.io.IOException e) {
+                System.out.println("Could not save high score to file" + e.getMessage());
+            }
+        }
+    }
     
     private void checkUserInput (int colorCode) {
         if (colorCode == sequence.get(userSequenceIndex)) {
@@ -149,9 +171,22 @@ public class Simon extends Application {
         else {
             disableColorButtons(true);
             promptLabel.setText("Game over! Final score:" + score + "Press start to play agian");
+            saveHighScore();
         }
+    }
 
-
+    private void loadHighscore() {
+        File file = new File(HIGHSCORE_FILE);
+        try (Scanner scanner = new Scanner(file)) {
+            if(scanner.hasNextInt()) {
+                highscore = scanner.nextInt();
+            }
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println("High score file not found. Starting fresh.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            highscore = 0;
+        }
     }
 
     private void generateNextMove () {
