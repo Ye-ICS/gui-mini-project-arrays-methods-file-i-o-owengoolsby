@@ -58,9 +58,7 @@ public class Simon extends Application {
 
         loadHighScore();
 
-        Label promptLabel = new Label();
-        promptLabel.setText("Simon Highscore:" + highscore);
-
+        
         // Create components to add.
         VBox contentBox = new VBox(20);
         contentBox.setAlignment(Pos.CENTER);
@@ -70,13 +68,13 @@ public class Simon extends Application {
         
         Image redBtnImage = new Image("images/red_button.png");
         ImageView redBtnImageView = new ImageView(redBtnImage);
-
+        
         Image yellowBtnImage = new Image("images/yellow_button.png");
         ImageView yellowBtnImageView = new ImageView(yellowBtnImage);
-
+        
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
-
+        
         int btnSize = 150;
         greenBtnImageView.setFitWidth(400);
         greenBtnImageView.setFitHeight(400);
@@ -88,8 +86,23 @@ public class Simon extends Application {
         blueBtnImageView.setFitHeight(400);
         
         Label promptLabel = new Label();
-        promptLabel.setText("Simon");
+        promptLabel.setText("Simon Highscore:" + highscore);
 
+        
+        redBtn = new Button();
+        redBtn.setGraphic(redBtnImageView);
+        
+        blueBtn = new Button();
+        blueBtn.setGraphic(blueBtnImageView);
+        
+        greenBtn = new Button();
+        greenBtn.setGraphic(greenBtnImageView);
+        
+        yellowBtn = new Button();
+        yellowBtn.setGraphic(yellowBtnImageView); 
+        
+        disableColorButtons(true);
+        
         Button startBtn = new Button("Start Game");
         startBtn.setOnAction(e -> {
             sequence.clear();
@@ -98,18 +111,6 @@ public class Simon extends Application {
             startBtn.setDisable(true);
             generateNextMove();
         });
-        
-        Button redBtn = new Button();
-        redBtn.setGraphic(redBtnImageView);
-        
-        Button blueBtn = new Button();
-        blueBtn.setGraphic(blueBtnImageView);
-        
-        Button greenBtn = new Button();
-        greenBtn.setGraphic(greenBtnImageView);
-        
-        Button yellowBtn = new Button();
-        yellowBtn.setGraphic(yellowBtnImageView);
 
         redBtn.setOnAction(e -> {
         checkUserInput(RED);
@@ -126,8 +127,8 @@ public class Simon extends Application {
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(0);
-        grid.setVgap(0);
+        grid.setHgap(5);
+        grid.setVgap(5);
 
         grid.add(redBtn, 0, 0);
         grid.add(blueBtn, 1, 0);
@@ -137,12 +138,39 @@ public class Simon extends Application {
         contentBox.getChildren().addAll(startBtn, promptLabel, grid);
         
         // Set up the window and display it.
-        Scene scene = new Scene(contentBox, 1000, 800);
+        Scene scene = new Scene(contentBox, 400, 450);
         stage.setScene(scene);
         stage.setTitle("Simon Game");
         stage.show();
     }
-
+    private void generateNextMove () {
+        int nextColor = random.nextInt(4);
+        sequence.add(nextColor);
+        userSequenceIndex = 0;
+        score = sequence.size() - 1;
+        flashSequence();
+    }
+    
+    private void checkUserInput (int colorCode) {
+        if (colorCode == sequence.get(userSequenceIndex)) {
+            userSequenceIndex++;
+            if (userSequenceIndex == sequence.size()) {
+                score=sequence.size();
+                promptLabel.setText("Correct! Score:" + score + ". Watch the next move");
+                Timeline pause = new Timeline(new KeyFrame(
+                    Duration.seconds(1.0),
+                    e -> generateNextMove()
+                ));
+                pause.play();
+            }
+        }
+        else {
+            disableColorButtons(true);
+            promptLabel.setText("Game over! Final score:" + score + "Press start to play agian");
+            saveHighScore();
+            startBtn.setDisable(false);
+        }
+    }
     private void saveHighScore(){
         if (score > highscore) {
             highscore = score;
@@ -156,24 +184,6 @@ public class Simon extends Application {
         }
     }
     
-    private void checkUserInput (int colorCode) {
-        if (colorCode == sequence.get(userSequenceIndex)) {
-            userSequenceIndex++;
-            if (userSequenceIndex == sequence.size()) {
-                score=sequence.size();
-                Timeline pause = new Timeline(new KeyFrame(
-                    Duration.seconds(1.5),
-                    e -> generateNextMove()
-                ));
-                pause.play();
-            }
-        }
-        else {
-            disableColorButtons(true);
-            promptLabel.setText("Game over! Final score:" + score + "Press start to play agian");
-            saveHighScore();
-        }
-    }
 
     private void loadHighscore() {
         File file = new File(HIGHSCORE_FILE);
@@ -189,12 +199,5 @@ public class Simon extends Application {
         }
     }
 
-    private void generateNextMove () {
-        int nextColor = random.nextInt(4);
-        sequence.add(nextColor);
-        userSequenceIndex = 0;
-        score = sequence.size() - 1;
-        flashSequence();
-    }
 
 }
