@@ -72,7 +72,7 @@ public class Simon extends Application {
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
         
-        int btnSize = 150;
+        int btnSize = 200;
         greenBtnImageView.setFitWidth(btnSize);
         greenBtnImageView.setFitHeight(btnSize);
         yellowBtnImageView.setFitWidth(btnSize);
@@ -115,9 +115,7 @@ public class Simon extends Application {
         blueBtn.setOnAction(e -> {
             checkUserInput(BLUE);
         });
-        greenBtn.setOnAction(e -> {
-            checkUserInput(GREEN);      
-        });
+        greenBtn.setOnAction(e -> checkUserInput(GREEN));
         yellowBtn.setOnAction(e -> {
             checkUserInput(YELLOW);
         });
@@ -217,29 +215,35 @@ public class Simon extends Application {
 
     private void flashButton (int colorCode, boolean on) {
         Button btn = null;
-
+        String colorStyle = "";
         switch(colorCode) {
             case RED:
                 btn = redBtn;
+                colorStyle = "-fx-background-color: red;";
                 break;
             case BLUE:
                 btn = blueBtn;
+                colorStyle = "-fx-background-color: blue;";
                 break;
             case GREEN:
                 btn = greenBtn;
+                colorStyle = "-fx-background-color: green;";
                 break;
             case YELLOW:
                 btn = yellowBtn;
+                colorStyle = "-fx-background-color: yellow;";
                 break;
         }
         if (btn != null) {
             if (on) {
-                btn.setStyle("-fx-effect: dropshadow (three-pass-box, white, 30, 0.8, 0, 0);");
+                btn.setStyle(colorStyle);
             } else {
                 btn.setStyle(null);
             }
         }
     }
+
+    // "-fx-effect: dropshadow (three-pass-box, white, 30, 0.8, 0, 0);"
 
     private void saveHighScore(){
         if (score > highscore) {
