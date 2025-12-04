@@ -7,9 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -76,17 +73,17 @@ public class Simon extends Application {
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
         
         int btnSize = 150;
-        greenBtnImageView.setFitWidth(400);
-        greenBtnImageView.setFitHeight(400);
-        yellowBtnImageView.setFitWidth(400);
-        yellowBtnImageView.setFitHeight(400);
-        redBtnImageView.setFitWidth(400);
-        redBtnImageView.setFitHeight(400);
-        blueBtnImageView.setFitWidth(400);
-        blueBtnImageView.setFitHeight(400);
+        greenBtnImageView.setFitWidth(btnSize);
+        greenBtnImageView.setFitHeight(btnSize);
+        yellowBtnImageView.setFitWidth(btnSize);
+        yellowBtnImageView.setFitHeight(btnSize);
+        redBtnImageView.setFitWidth(btnSize);
+        redBtnImageView.setFitHeight(btnSize);
+        blueBtnImageView.setFitWidth(btnSize);
+        blueBtnImageView.setFitHeight(btnSize);
         
-        Label promptLabel = new Label();
-        promptLabel.setText("Simon Highscore:" + highscore);
+        promptLabel = new Label();
+        promptLabel.setText("Simon Highscore: " + highscore);
         
         
         redBtn = new Button();
@@ -103,7 +100,7 @@ public class Simon extends Application {
         
         disableColorButtons(true);
         
-        Button startBtn = new Button("Start Game");
+        startBtn = new Button("Start Game");
         startBtn.setOnAction(e -> {
             sequence.clear();
             score = 0;
@@ -166,7 +163,7 @@ public class Simon extends Application {
         }
         else {
             disableColorButtons(true);
-            promptLabel.setText("Game over! Final score:" + score + "Press start to play agian");
+            promptLabel.setText("Game over! Final score: " + score + " Press start to play agian");
             saveHighScore();
             startBtn.setDisable(false);
         }
@@ -186,7 +183,7 @@ public class Simon extends Application {
                 Duration.millis(i * stepDuration),
                 e -> {
                     flashButton(colorCode, true);
-                    promptLabel.setText("Sequence step" + step + " of " + sequence.size());
+                    promptLabel.setText("Sequence step " + step + " of " + sequence.size());
                 }
             );
 
@@ -195,7 +192,7 @@ public class Simon extends Application {
                 e -> flashButton(colorCode, false)
             );
 
-            timeline.getKeyFrames().addAll(turnOff,turnOn);
+            timeline.getKeyFrames().addAll(turnOn, turnOff);
         }
 
         double totalDuration = sequence.size() * stepDuration;
@@ -247,8 +244,8 @@ public class Simon extends Application {
     private void saveHighScore(){
         if (score > highscore) {
             highscore = score;
-            File File = new File(HIGHSCORE_FILE);
-            try (PrintWriter writer = new PrintWriter(File)) {
+            File file = new File(HIGHSCORE_FILE);
+            try (PrintWriter writer = new PrintWriter(file)) {
                 writer.print(highscore);
                 System.out.println("New High Score saved: " + highscore);
             } catch (java.io.IOException ioe) {
