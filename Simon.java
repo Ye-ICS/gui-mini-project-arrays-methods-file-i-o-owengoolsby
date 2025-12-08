@@ -36,7 +36,6 @@ public class Simon extends Application {
     private Button startBtn;
     private Label promptLabel;
 
-    
     private static final int RED = 0;
     private static final int BLUE = 1;
     private static final int GREEN = 2;
@@ -48,18 +47,16 @@ public class Simon extends Application {
     
     private int userSequenceIndex = 0;
     
-    
-    
     @Override
     public void start(Stage stage) {
         
         loadHighScore();
         
         
-        // Create components to add.
         VBox contentBox = new VBox(20);
         contentBox.setAlignment(Pos.CENTER);
         
+        // Color Buttons
         Image blueBtnImage = new Image("images/blue_button.png");
         ImageView blueBtnImageView = new ImageView(blueBtnImage);
         
@@ -72,20 +69,6 @@ public class Simon extends Application {
         Image greenBtnImage = new Image("images/green_button.png");
         ImageView greenBtnImageView = new ImageView(greenBtnImage);
         
-        int btnSize = 200;
-        greenBtnImageView.setFitWidth(btnSize);
-        greenBtnImageView.setFitHeight(btnSize);
-        yellowBtnImageView.setFitWidth(btnSize);
-        yellowBtnImageView.setFitHeight(btnSize);
-        redBtnImageView.setFitWidth(btnSize);
-        redBtnImageView.setFitHeight(btnSize);
-        blueBtnImageView.setFitWidth(btnSize);
-        blueBtnImageView.setFitHeight(btnSize);
-        
-        promptLabel = new Label();
-        promptLabel.setText("Simon Highscore: " + highscore);
-        
-        
         redBtn = new Button();
         redBtn.setGraphic(redBtnImageView);
         
@@ -97,8 +80,34 @@ public class Simon extends Application {
         
         yellowBtn = new Button();
         yellowBtn.setGraphic(yellowBtnImageView); 
+
+        int btnSize = 200;
+        greenBtnImageView.setFitWidth(btnSize);
+        greenBtnImageView.setFitHeight(btnSize);
+        yellowBtnImageView.setFitWidth(btnSize);
+        yellowBtnImageView.setFitHeight(btnSize);
+        redBtnImageView.setFitWidth(btnSize);
+        redBtnImageView.setFitHeight(btnSize);
+        blueBtnImageView.setFitWidth(btnSize);
+        blueBtnImageView.setFitHeight(btnSize);
         
+        redBtn.setOnAction(e -> {
+            checkUserInput(RED);
+        });
+        blueBtn.setOnAction(e -> {
+            checkUserInput(BLUE);
+        });
+        greenBtn.setOnAction(e ->
+            {checkUserInput(GREEN);
+        });
+        yellowBtn.setOnAction(e -> {
+            checkUserInput(YELLOW);
+        });
+
         disableColorButtons(true);
+
+        promptLabel = new Label();
+        promptLabel.setText("Simon Highscore: " + highscore);
         
         startBtn = new Button("Start Game");
         startBtn.setOnAction(e -> {
@@ -109,17 +118,7 @@ public class Simon extends Application {
             generateNextMove();
         });
         
-        redBtn.setOnAction(e -> {
-            checkUserInput(RED);
-        });
-        blueBtn.setOnAction(e -> {
-            checkUserInput(BLUE);
-        });
-        greenBtn.setOnAction(e -> checkUserInput(GREEN));
-        yellowBtn.setOnAction(e -> {
-            checkUserInput(YELLOW);
-        });
-        
+        // The Grid
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(5);
@@ -132,7 +131,7 @@ public class Simon extends Application {
         
         contentBox.getChildren().addAll(startBtn, promptLabel, grid);
         
-        // Set up the window and display it.
+        // Window
         Scene scene = new Scene(contentBox, 400, 450);
         stage.setScene(scene);
         stage.setTitle("Simon Game");
@@ -151,7 +150,7 @@ public class Simon extends Application {
             userSequenceIndex++;
             if (userSequenceIndex == sequence.size()) {
                 score=sequence.size();
-                promptLabel.setText("Correct! Score:" + score + ". Watch the next move");
+                promptLabel.setText("Correct! Score: " + score + ". Watch the next move");
                 Timeline pause = new Timeline(new KeyFrame(
                     Duration.seconds(1.0),
                     e -> generateNextMove()
