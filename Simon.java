@@ -137,6 +137,8 @@ public class Simon extends Application {
         stage.setTitle("Simon Game");
         stage.show();
     }
+
+    // Method that generates the next color in the sequence
     private void generateNextMove () {
         int nextColor = random.nextInt(4);
         sequence.add(nextColor);
@@ -145,6 +147,7 @@ public class Simon extends Application {
         flashSequence();
     }
     
+    // Checks if user presses match with the sequence
     private void checkUserInput (int colorCode) {
         if (colorCode == sequence.get(userSequenceIndex)) {
             userSequenceIndex++;
@@ -166,6 +169,7 @@ public class Simon extends Application {
         }
     }
 
+    // Shows the buttons flashing in accordance with the sequence that they're in
     private void flashSequence(){
         disableColorButtons(true);
         Timeline timeline = new Timeline();
@@ -205,6 +209,7 @@ public class Simon extends Application {
         timeline.play();
     }
 
+    // Disables color button when not in use EX: Game showing sequence, game not started, game over
     private void disableColorButtons (boolean disabled) {
         redBtn.setDisable(disabled);
         blueBtn.setDisable(disabled);
@@ -212,6 +217,7 @@ public class Simon extends Application {
         yellowBtn.setDisable(disabled);
     }
 
+    // The animation of the buttons flashing from computer sequence
     private void flashButton (int colorCode, boolean on) {
         Button btn = null;
         String colorStyle = "";
@@ -244,6 +250,7 @@ public class Simon extends Application {
 
     // "-fx-effect: dropshadow (three-pass-box, white, 30, 0.8, 0, 0);"
 
+    // 
     private void saveHighScore(){
         if (score > highscore) {
             highscore = score;
