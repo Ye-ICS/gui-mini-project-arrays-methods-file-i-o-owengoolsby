@@ -41,8 +41,7 @@ public class SimonGame extends VBox {
     SimonGame() {
         loadHighScore();
         
-        
-        VBox contentBox = new VBox(20);
+        VBox contentBox = new VBox(50);
         contentBox.setAlignment(Pos.CENTER);
         
         // Color Buttons
