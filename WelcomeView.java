@@ -9,10 +9,10 @@ public class WelcomeView extends VBox{
         Label label = new Label("Welcome");
         Button startBtn = new Button("Press to start");
         getChildren().addAll(label, startBtn);
-        startBtn.setOnAction(null);
+        startBtn.setOnAction(e -> openSimonGame());
     }
 
-    void openSimonGame() {
+    public void openSimonGame() {
         Scene currentScene = getScene();    
         SimonGame newRoot = new SimonGame();  
         currentScene.setRoot(newRoot);

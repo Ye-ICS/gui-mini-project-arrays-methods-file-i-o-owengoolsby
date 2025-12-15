@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class SimonGame extends VBox{
+public class SimonGame extends VBox {
 
     int score = 0;
     private int highscore = 0;
