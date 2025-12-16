@@ -40,9 +40,9 @@ public class SimonGame extends VBox {
 
     SimonGame() {
         loadHighScore();
-        
-        VBox contentBox = new VBox(50);
-        contentBox.setAlignment(Pos.CENTER);
+
+        this.setSpacing(50);
+        this.setAlignment(Pos.CENTER);
         
         // Color Buttons
         Image blueBtnImage = new Image("images/blue_button.png");
@@ -117,7 +117,7 @@ public class SimonGame extends VBox {
         grid.add(greenBtn, 0, 1);
         grid.add(yellowBtn, 1, 1);
         
-        contentBox.getChildren().addAll(startBtn, promptLabel, grid);
+        this.getChildren().addAll(startBtn, promptLabel, grid);
     }
 
     // Method that generates the next color in the sequence
